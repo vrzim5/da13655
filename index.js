@@ -6,22 +6,6 @@ const { handleCards: handleCopas } = require('./copas.js');
 const { handleCards: handleOuros } = require('./ouros.js');
 const { handleCards: handleEspadas } = require('./espadas.js');
 const { handleCards: handleBaralho } = require('./baralho.js');
-const express = require("express");
-const app = express();
-
-// Rota simples só pra manter o serviço acordado
-app.get("/", (req, res) => {
-  res.send("Bot rodando!");
-});
-
-// Use a porta definida pelo Render ou 3000 (para testes locais)
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
-  console.log(`Servidor escutando na porta ${PORT}`);
-});
-
-
 
 const client = new Client({
     intents: [
