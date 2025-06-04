@@ -6,6 +6,17 @@ const { handleCards: handleCopas } = require('./copas.js');
 const { handleCards: handleOuros } = require('./ouros.js');
 const { handleCards: handleEspadas } = require('./espadas.js');
 const { handleCards: handleBaralho } = require('./baralho.js');
+const express = require("express");
+const app = express();
+
+app.get("/", (req, res) => {
+  res.send("Bot está rodando!");
+});
+
+app.listen(3000, () => {
+  console.log("Servidor web escutando na porta 3000");
+});
+
 
 const client = new Client({
     intents: [
