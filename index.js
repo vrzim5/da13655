@@ -1,6 +1,5 @@
-
 require('dotenv').config();
-const { Client, GatewayIntentBits } = require('discord.js');
+const { Client, GatewayIntentBits, ActivityType } = require('discord.js');
 const { handleDiceRoll } = require('./Dados.js');
 const { handleCards: handleCopas } = require('./copas.js');
 const { handleCards: handleOuros } = require('./ouros.js');
@@ -15,8 +14,24 @@ const client = new Client({
     ],
 });
 
+const statuses = [
+    { name: 'Assmiliação RPG', type: ActivityType.Playing },
+    { name: 'Assimiladies - Seiva e Sangue', type: ActivityType.Watching }
+];
+
+let currentStatus = 0;
+
 client.once('ready', () => {
     console.log(`🎲 Bot conectado como ${client.user.tag}`);
+
+    // Define o status inicial
+    client.user.setActivity(statuses[currentStatus]);
+
+    // Alterna o status a cada 5 minutos
+    setInterval(() => {
+        currentStatus = (currentStatus + 1) % statuses.length;
+        client.user.setActivity(statuses[currentStatus]);
+    }, 5 * 60 * 1000);
 });
 
 client.on('messageCreate', async message => {
